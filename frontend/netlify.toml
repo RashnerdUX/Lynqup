@@ -1,7 +1,7 @@
 [build]
   base    = "frontend"
   command = "npm run build"
-  publish = "out"  # or "frontend/dist" depending on your framework
+  publish = "frontend/.next"
 
 [dev]
   command = "npm run dev"
