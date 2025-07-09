@@ -1,0 +1,8 @@
+[build]
+  base    = "frontend"
+  command = "npm run build"
+  publish = "out"  # or "frontend/dist" depending on your framework
+
+[dev]
+  command = "npm run dev"
+  port = 3000
