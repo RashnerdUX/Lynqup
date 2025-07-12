@@ -64,9 +64,9 @@ class LoginSerializer(serializers.Serializer):
 class GoogleAuthSerializer(serializers.Serializer):
     auth_token = serializers.CharField(min_length=1)
 
-    def validate_access_token(self, value):
-        logger.info(f'Here is the id token - {value}')
+    def validate_auth_token(self, value):
         user_info = validate_google_token(value)
+        logger.info(f"Here's the info gotten - {user_info}")
 
         if not user_info:
             raise serializers.ValidationError('Invalid token')

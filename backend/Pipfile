@@ -4,13 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+dotenv = "*"
+rest-framework-simplejwt = "*"
+google-auth = "*"
 django = "*"
 djangorestframework = "*"
 psycopg2 = "*"
 django-rest-framework-social-oauth2 = "*"
-dotenv = "*"
-rest-framework-simplejwt = "*"
-google-auth = "*"
 
 [dev-packages]
 

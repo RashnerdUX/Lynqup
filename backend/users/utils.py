@@ -6,6 +6,17 @@ from typing import Dict
 User = get_user_model()
 
 def register_for_social(email, username, provider) -> Dict[str, str]:
+    """
+    Used to create an account in our database 
+
+    Args:
+        email (str): The email provided by the social API
+        username (str): The username provided by the social API
+        provider (str): The social API used to register this user
+
+    Returns:
+        Dict[str, str]: Returns the new/existing user's email, username and generated JWT Tokens
+    """
 
     #Find user in the database
     user = User.objects.filter(email=email).first()
