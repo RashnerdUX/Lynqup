@@ -22,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 from dotenv import load_dotenv
 import os
 from datetime import timedelta
+import dj_database_url
 
 load_dotenv()
 
@@ -92,15 +93,12 @@ WSGI_APPLICATION = 'lynqup.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "lynqup_db",
-        "USER": "postgres",
-        "PASSWORD": os.getenv('DB_PASSWORD', ""),
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
+    #This package - dj_database_url will automatically detect DATABASE_URL env and use it as it's default db
+    "default": dj_database_url.config(
+        conn_max_age=600
+    )
 }
 
 #JWT Setup
