@@ -5,6 +5,7 @@ from django.conf import settings
 from typing import Dict
 
 from rest_framework_simplejwt.tokens import RefreshToken
+from mentorship.models import Skills
 
 class CustomUser(AbstractUser):
     email = models.EmailField(
@@ -53,6 +54,7 @@ class CustomUser(AbstractUser):
 
 #Refactored User model to make matching easier
 class UserProfile(models.Model):
+    #Role of User
     MENTOR = "mentor"
     MENTEE = "mentee"
     ROLE_CHOICES = {
@@ -60,13 +62,55 @@ class UserProfile(models.Model):
         MENTEE:"MENTEE",
     }
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
-    role = models.CharField(max_length=100, choices=ROLE_CHOICES, blank=True)
+    #Experience level
+    BEGINNER = "beginner"
+    INTERMEDIATE = "intermediate"
+    EXPERT = "expert"
+    EXPERIENCE_LEVELS ={
+        BEGINNER : "BEGINNER",
+        INTERMEDIATE: "INTERMEDIATE",
+        EXPERT: "EXPERT"
+    }
+
+    # Industry Choices
+    TECH = "tech"
+    DESIGN = "design"
+    BUSINESS = "business"
+    MARKETING = "marketing"
+    FINANCE = "finance"
+    EDUCATION = "education"
+    HEALTHCARE = "healthcare"
+    LEGAL = "legal"
+    ENGINEERING = "engineering"
+    ARTS = "arts"
+    OTHER = "other"
+    INDUSTRIES = {
+        TECH: "Tech",
+        DESIGN: "Design",
+        BUSINESS: "Business",
+        MARKETING: "Marketing",
+        FINANCE: "Finance",
+        EDUCATION: "Education",
+        HEALTHCARE: "Healthcare",
+        LEGAL: "Legal",
+        ENGINEERING: "Engineering",
+        ARTS: "Arts",
+        OTHER: "Other",
+    }
+
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="profile")
+    bio = models.TextField(blank=True, help_text="Tell us a little bit about yourself")
+    title = models.CharField(max_length=100, help_text="What's the user's current job title?")
+    career_summary = models.TextField(blank=True, null=True, help_text="What has this user done over the course of their career?")
+    experience_level = models.CharField(max_length=15, choices=EXPERIENCE_LEVELS)
+    career_goal = models.CharField(max_length=500, help_text="Where does the user want to be in 5 years?")
+    industry = models.CharField(max_length=50, choices=INDUSTRIES, help_text="Where does this user work or intend to work")
+    role = models.CharField(max_length=6, choices=ROLE_CHOICES, blank=True, help_text="Is the user a mentor or mentee?")
     country = models.CharField(max_length=100, blank=True)
-    
+
+
     # Skills
-    skills = models.ManyToManyField("Skill", blank=True)
+    skills = models.ManyToManyField(to=Skills, blank=True, related_name="skills_list")
 
     # Avatar
     profile_image = models.ImageField(upload_to='avatars/', blank=True, null=True)

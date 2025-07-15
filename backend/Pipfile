@@ -18,6 +18,7 @@ djangorestframework-simplejwt = "*"
 drf-spectacular = "*"
 django-cors-headers = "*"
 pillow = "*"
+sentence-transformers = "*"
 
 [dev-packages]
 
