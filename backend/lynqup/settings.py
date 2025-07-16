@@ -198,6 +198,14 @@ else:
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#Asynchronous actions with Celery
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+
 # Logging configuration
 LOGGING = {
     'version': 1,
@@ -243,4 +251,13 @@ LOGGING = {
             'propagate': False,
         },
     },
+}
+
+#For documentation
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Lynqup API',
+    'DESCRIPTION': 'This is the backend service for a mentorship platform called Lynqup',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
 }

@@ -1,0 +1,12 @@
+Hi {{ user.first_name|default:user.username }},
+
+Thank you for joining our service! We're thrilled to have you.
+
+To get started, you can visit your dashboard:
+{{ dashboard_url }}
+Please endeavour to verify your email address too. You should have received an email with steps
+
+If you have any questions, feel free to reply to this email.
+
+Best regards,
+The Lynqup Team

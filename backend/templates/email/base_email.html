@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block subject_content %}{% endblock %}</title>
+    <style>
+        /* Inline your CSS for best compatibility across email clients */
+        /* TODO:Change this styling to suit the one decided on with the UI designer */
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        .container { width: 100%; max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .header { background-color: #007bff; color: #ffffff; padding: 15px; text-align: center; border-top-left-radius: 8px; border-top-right-radius: 8px; }
+        .content { padding: 20px 0; line-height: 1.6; color: #333333; }
+        .footer { border-top: 1px solid #eeeeee; padding-top: 15px; margin-top: 20px; text-align: center; font-size: 0.9em; color: #777777; }
+        .button { display: inline-block; padding: 10px 20px; margin-top: 15px; background-color: #28a745; color: #ffffff; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{% block header_text %}LynqUp{% endblock %}</h1>
+        </div>
+        <div class="content">
+            {% block email_body %}{% endblock %}
+        </div>
+        <div class="footer">
+            <p>
+                &copy; {{ year }} LynqUp All rights reserved. <br>
+                <a href="mailto:support@your-domain.com">Support</a> | <a href="http://your-domain.com/privacy">Privacy Policy</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

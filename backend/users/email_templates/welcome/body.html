@@ -1,0 +1,14 @@
+{% extends "backend/templates/emails/base_email.html" %}
+
+{% block subject_content %}Welcome to Our Service!{% endblock %} {# This block is overridden by direct subject template #}
+{% block header_text %}Welcome Aboard!{% endblock %}
+
+{% block email_body %}
+    <p>Hi {{ user.first_name|default:user.username }},</p>
+    <p>Thank you for joining our service! We're thrilled to have you.</p>
+    <p>To get started, you can visit your dashboard:</p>
+    <p><a href="{{ dashboard_url }}" style="display: inline-block; padding: 10px 20px; margin-top: 15px; background-color: #28a745; color: #ffffff; text-decoration: none; border-radius: 5px;">Go to Dashboard</a></p>
+    <p>Please endeavour to verify your email address too. You should have received an email with steps</p>
+    <p>If you have any questions, feel free to reply to this email.</p>
+    <p>Best regards,<br> The Lynqup Team</p>
+{% endblock %}

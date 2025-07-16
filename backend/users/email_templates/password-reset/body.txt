@@ -1,0 +1,14 @@
+Hello {{ user.first_name|default:user.username }},
+
+You are receiving this email because you requested a password reset for your account on our platform.
+
+To reset your password, please click on the following link:
+{{ reset_url }}
+
+This link is valid for a limited time and will expire for security reasons.
+
+If you did not request a password reset, please ignore this email. Your password will remain unchanged.
+
+Thank you,
+The Lynqup Team 
+{{ base_url }}
