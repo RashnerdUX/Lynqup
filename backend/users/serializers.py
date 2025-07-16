@@ -114,7 +114,7 @@ class PasswordResetRequestSerializer(serializers.Serializer):
             'Password Reset Request',
             f'Please click the following link to reset your password: {reset_url}',
             settings.DEFAULT_FROM_EMAIL,
-            [email],
+            [user.email],
             fail_silently=False,
             )
 
