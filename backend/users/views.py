@@ -15,7 +15,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from drf_spectacular.utils import extend_schema
 
-from users.serializers import GoogleAuthSerializer
+from users.serializers import GoogleAuthSerializer, PasswordResetConfirmSerializer, PasswordResetRequestSerializer
 
 
 logger = logging.getLogger(__name__)
@@ -121,3 +121,20 @@ class GoogleSignInView(GenericAPIView):
         logger.warning('Failed to authenticate user with Google Sign-in')
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
+class PasswordResetRequestView(APIView):
+    serializer_class = PasswordResetRequestSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"message": "Password reset email sent successfully."}, status=status.HTTP_200_OK)
+
+class PasswordResetConfirmView(APIView):
+    serializer_class = PasswordResetConfirmSerializer
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"message": "Password reset successful."}, status=status.HTTP_200_OK)
