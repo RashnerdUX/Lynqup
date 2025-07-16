@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'corsheaders',
     'mentorship',
+    'notifications',
 ]
 
 MIDDLEWARE = [
