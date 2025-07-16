@@ -121,6 +121,11 @@ class GoogleSignInView(GenericAPIView):
         logger.warning('Failed to authenticate user with Google Sign-in')
         return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
 
+@extend_schema(
+    request=PasswordResetRequestSerializer,
+    responses={200: None, 401: None},
+    description="Reset a user's password and send them an email with reset link."
+)
 class PasswordResetRequestView(APIView):
     serializer_class = PasswordResetRequestSerializer
 
@@ -130,6 +135,11 @@ class PasswordResetRequestView(APIView):
         serializer.save()
         return Response({"message": "Password reset email sent successfully."}, status=status.HTTP_200_OK)
 
+@extend_schema(
+    request=PasswordResetConfirmSerializer,
+    responses={200: None, 401: None},
+    description="Receive a random generated token and reset user's password"
+)
 class PasswordResetConfirmView(APIView):
     serializer_class = PasswordResetConfirmSerializer
 

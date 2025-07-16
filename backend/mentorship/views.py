@@ -9,10 +9,16 @@ from .utils import getMatchesForUser
 from users.models import UserProfile, CustomUser
 from .serializers import MatchResultsSerializer, MatchSerializer, MentorshipRequestSerializer
 from .models import Mentorship, MentorshipRequest
+from drf_spectacular.utils import extend_schema
 
 # Create your views here.
 logger = logging.getLogger(__name__)
 
+@extend_schema(
+    request=None,
+    responses={200: MatchResultsSerializer(many=True)},
+    description="Get a list of possible mentors for the user."
+)
 class MentorshipOpportunitiesView(views.APIView):
     """
     GET api/v1/mentorship/opportunities/
@@ -55,6 +61,11 @@ class MentorshipOpportunitiesView(views.APIView):
             }, status=status.HTTP_200_OK)
         return Response(data=serialized.errors, status=status.HTTP_400_BAD_REQUEST)
     
+@extend_schema(
+    request=None,
+    responses={200: MatchSerializer(many=True)},
+    description="Get the list of matches available to a user."
+)
 class UserMatchesView(views.APIView):
     """
     GET api/v1/mentorship/mentor/matches/
@@ -98,6 +109,11 @@ class UserMatchesView(views.APIView):
         
         return Response(data=serialized.data, status=status.HTTP_200_OK)
     
+@extend_schema(
+    request=MentorshipRequestSerializer,
+    responses={201: None, 400: None},
+    description="Send a mentorship request to a mentor."
+)
 class SendMentorshipRequestView(views.APIView):
     """
     GET api/v1/mentorship/request/send/<int:mentor_id=1>/
@@ -125,6 +141,15 @@ class SendMentorshipRequestView(views.APIView):
             return Response(data={"message":"Mentorship Request sent successfully"}, status=status.HTTP_201_CREATED)
         return Response(data=serialized.errors, status=status.HTTP_400_BAD_REQUEST)
     
+@extend_schema(
+    parameters=[
+        {"name": "request_id", "required": True, "type": int, "description": "ID of the mentorship request to manage."},
+        {"name": "action", "required": True, "type": str, "description": "Action to take: 'accept' or 'reject'."},
+    ],
+    request=None,
+    responses={200: None, 400: None},
+    description="Accept or reject a mentorship request."
+)
 class ManageMentorshipRequestView(views.APIView):
     """
     GET api/v1/mentorship/requests/<int:request_id=1>/<str:action=''>/
@@ -178,6 +203,11 @@ class ManageMentorshipRequestView(views.APIView):
         else:
             return Response(data={"message":"Invalid action. Please 'accept' or 'deny' request"}, status=status.HTTP_400_BAD_REQUEST)
         
+@extend_schema(
+    request=None,
+    responses={200: None, 400: None},
+    description="List mentorship requests sent and received by the user."
+)
 class ListMentorshipRequests(views.APIView):
     """
     GET api/v1/mentorship/requests/
@@ -219,6 +249,15 @@ class ListMentorshipRequests(views.APIView):
         except Exception as e:
             return Response(data={"message":"There was an error getting requests list", "error":e}, status=status.HTTP_400_BAD_REQUEST)
 
+@extend_schema(
+    parameters=[
+        {"name": "match_id", "required": True, "type": int, "description": "ID of the mentorship match to manage."},
+        {"name": "action", "required": True, "type": str, "description": "Action to take: 'end' or 'cancel'."},
+    ],
+    request=None,
+    responses={200: None, 400: None},
+    description="End or cancel an active mentorship match."
+)
 class ManageMentorshipView(views.APIView):
     #TODO: Use this format for other API Views Docstrings
     """
@@ -259,4 +298,4 @@ class ManageMentorshipView(views.APIView):
 
         else:
             return Response({"message": "Invalid action. Use 'end' or 'cancel'."}, status=400)
-    
+
