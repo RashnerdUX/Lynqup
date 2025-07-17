@@ -1,9 +1,11 @@
 from django.contrib.auth import get_user_model
-from sentence_transformers import SentenceTransformer, util
+from django.apps import apps
+import logging
 
 from users.models import UserProfile, CustomUser
 
 User = get_user_model()
+logger = logging.getLogger(__name__)
 
 #This will contain all code related to the matching algorithm
 matching_criteria = {
@@ -86,6 +88,7 @@ def calculateMatchScore(mentee:CustomUser, mentor:CustomUser):
 
 
 def get_semantic_similarity(text1:str, text2:str):
+    from sentence_transformers import util
     """An utility function to find the similarity between two pieces of text
 
     Args:
@@ -100,7 +103,12 @@ def get_semantic_similarity(text1:str, text2:str):
     text2_safe = text2 if text2 is not None else ""
 
     #Define the ML model that Sentence Transformer will use
-    model = SentenceTransformer("all-MiniLM-L6-v2")
+    mentorship_app_config = apps.get_app_config("mentorship")
+    model = mentorship_app_config.sentence_transformer_model
+    
+    if model is None:
+        logger.warning("Sentence Transformer Model hasn't been loaded for use. Unable to complete request")
+        raise RuntimeError("SentenceTransformer model is not available. Check application logs for loading errors.")
 
     #Create their vector embeddings
     text1_embedding = model.encode(text1_safe, convert_to_tensor=True)
