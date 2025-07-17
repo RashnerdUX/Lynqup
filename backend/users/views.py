@@ -3,19 +3,19 @@ from django.contrib.auth import authenticate, login, get_user_model
 from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets, permissions
 from rest_framework.permissions import AllowAny
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.utils.encoding import force_str
 from django.contrib.auth.tokens import default_token_generator
 import logging
-from users.serializers import RegisterSerializer, LoginSerializer
 from django.core.mail import send_mail
 from django.conf import settings
 from drf_spectacular.utils import extend_schema
 
-from users.serializers import GoogleAuthSerializer, PasswordResetConfirmSerializer, PasswordResetRequestSerializer
+from users.serializers import GoogleAuthSerializer, PasswordResetConfirmSerializer, PasswordResetRequestSerializer, RegisterSerializer, LoginSerializer, UserProfileSerializer
+from users.models import UserProfile
 
 
 logger = logging.getLogger(__name__)
@@ -77,6 +77,20 @@ class LoginView(APIView):
 
         logger.warning(f'Login failed for username: {identifier}: {serializer.errors}')
         return Response({'error': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+class UserProfileView(viewsets.ModelViewSet):
+
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return UserProfile.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    
 
 @extend_schema(
     parameters=[

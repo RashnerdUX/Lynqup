@@ -10,6 +10,7 @@ import logging
 
 from users.utils import register_for_social
 from users.social_auth.google import validate_google_token
+from users.models import UserProfile
 
 #Get the user model
 User = get_user_model()
@@ -24,6 +25,15 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'email')
         extra_kwargs = {'password': {'write_only': True}}
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    """
+    Serializer of the User Profile
+    """
+    class Meta:
+        model= UserProfile
+        fields='__all__'
+
 
 
 class RegisterSerializer(serializers.ModelSerializer):
