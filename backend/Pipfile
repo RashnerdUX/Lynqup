@@ -4,6 +4,22 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+dotenv = "*"
+rest-framework-simplejwt = "*"
+google-auth = "*"
+django = "*"
+psycopg2 = "*"
+django-rest-framework-social-oauth2 = "*"
+whitenoise = "*"
+gunicorn = "*"
+dj-database-url = "*"
+djangorestframework = "*"
+djangorestframework-simplejwt = "*"
+drf-spectacular = "*"
+django-cors-headers = "*"
+pillow = "*"
+sentence-transformers = "*"
+celery = {extras = ["redis"], version = "*"}
 
 [dev-packages]
 
