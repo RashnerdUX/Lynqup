@@ -25,6 +25,7 @@ export interface PaginatedResponse<T> extends ApiResponse<T> {
 export interface LoginFormData {
   email: string;
   password: string;
+  [key: string]: unknown;
 }
 
 export interface SignupFormData {

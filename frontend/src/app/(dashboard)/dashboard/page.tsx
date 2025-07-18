@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Home, Users, Search, PhoneCall, Star } from "lucide-react"; // Importing icons from lucide-react
 
 // Main App component

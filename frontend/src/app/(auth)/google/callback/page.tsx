@@ -1,30 +1,11 @@
 "use client";
-import { useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useAppDispatch } from "@/store";
-import { googleLogin } from "@/store/slices/authSlice";
+import { Suspense } from "react";
+import GoogleCallbackPageInner from "./GoogleCallbackPageInner";
 
 export default function GoogleCallbackPage() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    const params: Record<string, string> = {};
-    for (const [key, value] of searchParams.entries()) {
-      params[key] = value;
-    }
-    (async () => {
-      try {
-        await dispatch(googleLogin(params)).unwrap();
-        router.push("/dashboard");
-      } catch (error) {
-        // Handle any errors that might occur during the dispatch
-        console.error("Google login failed:", error);
-        router.push("/login?error=google");
-      }
-    })();
-  }, [dispatch, router, searchParams]);
-
-  return <div>Signing in with Google...</div>;
+  return (
+    <Suspense fallback={<div>Signing in with Google...</div>}>
+      <GoogleCallbackPageInner />
+    </Suspense>
+  );
 }
