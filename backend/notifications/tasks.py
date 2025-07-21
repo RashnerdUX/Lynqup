@@ -17,6 +17,7 @@ def create_notification_task(user_id, username, related_type, related_to_id, con
     )
     
     notification_content = {
+        "notification_id": notification.pk,
         "message": notification.content,
         "link": notification.link,
         "notification_object": notification.related_type #This refers to the action that the notiification was created for

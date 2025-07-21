@@ -28,6 +28,7 @@ class Notification(models.Model):
     content = models.TextField(help_text="This is the actual message being sent with the notification")
     link = models.URLField(blank=True, null=True, help_text="This is a routing link to take user to where they'll take an action based on the notification")
     is_read = models.BooleanField(default=False, help_text="Determines if the notification has been seen by the user")
+    is_delivered = models.BooleanField(default=False, help_text="This confirms if the notification was sent to the user")
     created_at = models.DateTimeField(auto_now_add=True, help_text="When the notification was created")
 
     class Meta:

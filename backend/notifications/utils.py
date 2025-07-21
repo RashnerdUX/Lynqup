@@ -1,6 +1,9 @@
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from typing import Dict
+import logging
+
+logger = logging.getLogger(__name__)
 
 def notify_user(username:str, content:Dict):
     """
@@ -11,10 +14,11 @@ def notify_user(username:str, content:Dict):
         content (Dict): A dictionary containing all the information needed by the frontend to craft the notification
     """
     channel_layer = get_channel_layer()
+    logger.info(f"Sending the content to the function - {content}")
     async_to_sync(channel_layer.group_send)(
         f"notify-{username}",
         {
-            "type": "send.notification", 
+            "type": "send_notification", 
             "content": content           
         }
     )
