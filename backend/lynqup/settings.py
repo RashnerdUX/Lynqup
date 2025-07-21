@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'corsheaders',
     'mentorship.apps.MentorshipConfig',
-    'notifications',
+    'notifications.apps.NotificationsConfig',
 ]
 
 MIDDLEWARE = [
