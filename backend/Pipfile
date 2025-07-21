@@ -20,6 +20,8 @@ django-cors-headers = "*"
 pillow = "*"
 sentence-transformers = "*"
 celery = {extras = ["redis"], version = "*"}
+channels = {extras = ["daphne"], version = "*"}
+channels-redis = "*"
 
 [dev-packages]
 
