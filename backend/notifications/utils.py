@@ -14,7 +14,7 @@ def notify_user(username:str, content:Dict):
     async_to_sync(channel_layer.group_send)(
         f"notify-{username}",
         {
-            "type": "send_notification", 
+            "type": "send.notification", 
             "content": content           
         }
     )
