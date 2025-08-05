@@ -1,20 +1,16 @@
 import React from "react";
-import { Home, Users, Search, PhoneCall, Star } from "lucide-react"; // Importing icons from lucide-react
+import { Home, Users, Search, PhoneCall, Star } from "lucide-react"; 
 
-// Main App component
 const App = () => {
   return (
     <div className="flex h-screen overflow-hidden font-inter">
-      {/* Sidebar Component */}
+
       <Sidebar />
 
-      {/* Main Content Area */}
       <div className="flex-1 flex flex-col p-8 overflow-y-auto custom-scrollbar">
-        {/* Header Component */}
+    
         <Header />
-
-        {/* Welcome Section */}
-        <section className="mb-8">
+       <section className="mb-8">
           <h2 className="text-3xl font-bold text-primary mb-2">
             Hello Seyi 👋
           </h2>
@@ -24,13 +20,12 @@ const App = () => {
           </p>
         </section>
 
-        {/* Active Connections Section */}
         <section className="mb-8">
           <h3 className="text-xl font-semibold text-gray-800 mb-4">
             Active Connections
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Connection Cards */}
+       
             <ConnectionCard
               imgSrc="/assets/cody.png"
               name="Cody Fisher"
@@ -62,9 +57,9 @@ const App = () => {
           </div>
         </section>
 
-        {/* Active Users Section */}
+
         <section className="bg-white p-6 rounded-2xl shadow-md">
-          {/* Tabs */}
+      
           <div className="flex border-b border-gray-200 mb-4 overflow-x-auto">
             <button className="py-3 px-6 text-blue-600 font-semibold border-b-2 border-blue-600 whitespace-nowrap">
               Active Users
@@ -80,7 +75,7 @@ const App = () => {
             </button>
           </div>
 
-          {/* User List/Table */}
+         
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -118,7 +113,7 @@ const App = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {/* User Rows */}
+         
                 <UserRow
                   imgSrc="/assets/eleanor.png"
                   name="Eleanor Pena"
@@ -152,7 +147,6 @@ const App = () => {
   );
 };
 
-// Sidebar Component
 const Sidebar = () => (
   <aside className="w-64 bg-card p-6 flex flex-col shadow-lg rounded-r-2xl">
     <div className="mb-10">
@@ -183,7 +177,7 @@ const Sidebar = () => (
   </aside>
 );
 
-// Header Component
+
 const Header = () => (
   <header className="flex justify-between items-center mb-8">
     <div className="relative w-96">
@@ -196,7 +190,7 @@ const Header = () => (
         className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
         size={20}
       />{" "}
-      {/* Lucide icon */}
+
     </div>
     <div className="flex items-center">
       <img
@@ -208,7 +202,6 @@ const Header = () => (
   </header>
 );
 
-// Connection Card Component
 type ConnectionCardProps = {
   imgSrc: string;
   name: string;
@@ -247,7 +240,6 @@ const ConnectionCard = ({
   </div>
 );
 
-// User Row Component for the table
 type UserRowProps = {
   imgSrc: string;
   name: string;

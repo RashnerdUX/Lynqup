@@ -8,15 +8,14 @@ export default function LandingPage() {
 
   return (
     <main className="min-h-screen from-background-start-rgb to-background-end-rgb dark:from-background dark:to-background flex flex-col items-center justify-center px-4 relative overflow-hidden font-sans">
-      {/* Decorative Gradient Circles */}
+     
 
-      {/* Company Name */}
       <div className="w-full text-center pt-10 pb-2 z-10">
-        <span className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-chart-1 via-chart-4 to-primary text-primary-foreground font-extrabold text-2xl shadow-lg tracking-wide animate-fade-in">
-          Lynqup
+        <span className="inline-block px-6 py-2 rounded-full bg-gradient-to-r from-chart-1 via-chart-4 to-primary  font-extrabold text-2xl shadow-lg tracking-wide animate-fade-in text-[#49B3E7]">
+          Lynqup.
         </span>
       </div>
-      {/* Hero Section */}
+   
       <section className="w-full max-w-4xl text-center py-16 relative z-10">
         <p className="text-xl md:text-2xl mb-8 text-muted-foreground animate-fade-in delay-100">
           Lynqup connects mentors and entrepreneurs, helping you build
@@ -32,7 +31,7 @@ export default function LandingPage() {
         </Button>
       </section>
 
-      {/* Features Section */}
+   
       <section className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-3 gap-10 py-16 relative z-10">
         <div className="bg-card p-8 rounded-3xl shadow-2xl flex flex-col items-center border border-border hover:scale-105 transition-transform duration-300 animate-fade-in delay-300">
           <Image
@@ -84,14 +83,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="w-full max-w-4xl text-center py-10 text-muted-foreground relative z-10 animate-fade-in delay-700">
         <span className="text-lg">
           &copy; {new Date().getFullYear()} Lynqup. All rights reserved.
         </span>
       </footer>
 
-      {/* Animations */}
+
       <style jsx>{`
         .animate-fade-in {
           opacity: 0;

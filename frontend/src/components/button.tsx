@@ -19,7 +19,7 @@ export default function Button({
 }: ButtonProps) {
   let variantClasses = "";
   if (variant === "primary") {
-    variantClasses = "bg-primary text-primary-foreground hover:bg-primary/90";
+    variantClasses = "bg-[#49B3E7] text-primary-foreground hover:bg-[#42A1D0]";
   } else if (variant === "outline") {
     variantClasses =
       "bg-background text-foreground border border-border hover:bg-muted";
