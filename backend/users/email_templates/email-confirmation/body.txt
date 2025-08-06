@@ -1,0 +1,8 @@
+Welcome to [Your Platform Name] 👋
+
+Thanks for signing up! Please confirm your email address to activate your account.
+
+Click the link below to confirm your email:
+{{ confirmation_link }}
+
+If you did not sign up, you can ignore this email.
